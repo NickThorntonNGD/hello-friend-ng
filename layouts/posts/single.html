@@ -1,8 +1,16 @@
 {{ define "main" }}
   <main class="post">
-
+    
     <div class="post-info">
+
+      <hr />
+   
       <p>
+
+        {{ partial "tags.html" .Params.tags }}
+      {{ partial "categories.html" . }} 
+
+
         <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-clock">
           <circle cx="12" cy="12" r="10"></circle>
           <polyline points="12 6 12 12 16 14"></polyline>
@@ -15,56 +23,8 @@
           {{ end}}
         {{ end }}
       </p>
-    </div>
-
-    <article>
-      <h1 class="post-title">
-        <a href="{{ .Permalink }}">{{ .Title | markdownify }}</a>
-      </h1>
-
-      {{ with .Params.Description }}
-        <div class="post-excerpt">{{ . }}</div>
-      {{ end }}
-
-      {{ if .Params.Cover }}
-        <figure class="post-cover">
-          <img src="{{ .Params.Cover | absURL }}" alt="{{ .Title }}" />
-          
-          {{ if .Params.CoverCaption }}
-            <figcaption class="center">{{ .Params.CoverCaption | markdownify }}</figcaption>
-          {{ end }}
-        </figure>
-      {{ end }}
-
-      {{- if .Params.toc }}
-        <hr />
-        <aside id="toc">
-          <div class="toc-title">{{ i18n "tableOfContents" }}</div>
-          {{ .TableOfContents }}
-        </aside>
-        <hr />
-      {{- end }}
-
-      {{ if .Params.Audio }}
-        <div class="post-audio">
-          <audio controls>
-            <source src="{{ .Params.Audio }}">
-          </audio>
-        </div>
-      {{ end }}
-
-      <div class="post-content">
-        {{ .Content }}
-      </div>
-    </article>
-
-    <hr />
-
-    <div class="post-info">
-      {{ partial "tags.html" .Params.tags }}
-      {{ partial "categories.html" . }}
-
       <p>
+          
         <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-file-text">
           <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path>
           <polyline points="14 2 14 8 20 8"></polyline>
@@ -112,6 +72,53 @@
         </p>
       {{- end }}
     </div>
+    <hr />
+    <br>
+    
+    <article>
+      <h1 class="post-title">
+        <a href="{{ .Permalink }}">{{ .Title | markdownify }}</a>
+      </h1>
+
+      {{ with .Params.Description }}
+        <div class="post-excerpt">{{ . }}</div>
+      {{ end }}
+
+      {{ if .Params.Cover }}
+        <figure class="post-cover">
+          <img src="{{ .Params.Cover | absURL }}" alt="{{ .Title }}" />
+          
+          {{ if .Params.CoverCaption }}
+            <figcaption class="center">{{ .Params.CoverCaption | markdownify }}</figcaption>
+          {{ end }}
+        </figure>
+      {{ end }}
+
+      {{- if .Params.toc }}
+        <hr />
+        <aside id="toc">
+          <div class="toc-title">{{ i18n "tableOfContents" }}</div>
+          {{ .TableOfContents }}
+        </aside>
+        <hr />
+      {{- end }}
+
+      {{ if .Params.Audio }}
+        <div class="post-audio">
+          <audio controls>
+            <source src="{{ .Params.Audio }}">
+          </audio>
+        </div>
+      {{ end }}
+
+      <div class="post-content">
+        {{ .Content }}
+      </div>
+    </article>
+
+    
+
+    
 
     {{- if .Site.Params.EnableSharingButtons }}
       <hr />
@@ -147,4 +154,4 @@
     {{ end }}
 
   </main>
-{{ end }}
+  {{ end }}
