@@ -3,21 +3,54 @@
 {{ end }}
 
 {{ define "main" }}
-    <main>
-        <div>
-            {{ if .Site.Params.Portrait.Path }}
-               <img src="{{ .Site.Params.Portrait.Path }}" class="circle" alt="{{ .Site.Params.Portrait.Alt }}" style="max-width:{{ .Site.Params.Portrait.MaxWidth }}" />
-            {{ end }}
+    
+<style>
 
-            <h1>{{ .Site.Title }}</h1>
+    .welcome-message {
+        font-family: 'Arial', sans-serif;
+        
+        line-height: 1.6;
+        max-width: 700px;
+        margin: 0 auto;
+        padding: 20px;
+        
+        border-radius: 8px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+      }
+      
+      .welcome-message p {
+        margin: 0;
+        color: #333;
+      }
+      </style>
 
-            {{ partial "subtitle.html" . }}
-
-            {{- with .Site.Params.social }}
-                <div>
-                    {{ partial "social-icons.html" . }}
-                </div>
-            {{- end }}
+    <div class="welcome">
+        <h1>Welcome to Nick's Portfolio</h1>
+        <p class="welcome-message">Hi, I'm Nick, and I've allways been passionate about technology 💻. 
+            From creating video games 🎮 and websites to offering tech support
+             and cybersecurity advice, I've always been fascinated by how things work behind 
+             the screen. On this site, you can explore my journey in the tech
+              world, from building custom PCs to helping others stay safe online 🔒. 
+            Thanks for visiting—feel free to reach out if you want to collaborate
+             or learn more about my work!
         </div>
-    </main>
+
+      <hr style="width:69.9%;text-align:center;height:3px">
+      <p>Discover my latest projects and insights below.</p>
+      <div class="recent-posts">
+        <h2>Recent Projects</h2>
+        {{ if (where .Site.RegularPages "Type" "posts") }}
+          <ul>
+            {{ range first 3 (where .Site.RegularPages "Type" "posts") }}
+              <li>
+                <a href="{{ .RelPermalink }}">{{ .Title }}</a>
+                
+              </li>
+            {{ end }}
+          </ul>
+        {{ else }}
+          <p>No recent projects to display. Check back soon!</p>
+        {{ end }}
+      </div>
+      
 {{ end }}
